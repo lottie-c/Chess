@@ -24,6 +24,7 @@ void ChessBoard::initial_board_config(){
   turn = "White";
   white_king = "E1";
   black_king = "E8";
+  game_over = false;
 
   //make white pawns
   board["A2"] = new Pawn("White");
@@ -119,6 +120,11 @@ void ChessBoard::submitMove(string start, string end){
 
   /*make sure that 'start' and 'end' are squares on an
    8X8 chessboard*/
+  if (game_over){
+    cout << "Cannot make move, game is over." << endl;
+    return;
+  }
+
   if(!(square_on_board(start)&&square_on_board(end))){
     return;
   }
@@ -162,6 +168,7 @@ void ChessBoard::submitMove(string start, string end){
      in check mate*/
     if(check_checkmate(opponent)){
       cout << opponent << " is in checkmate" << endl;
+      game_over = true;
       return;
     }else{
       cout << opponent << " is in check" << endl;
@@ -171,6 +178,7 @@ void ChessBoard::submitMove(string start, string end){
       that they can make without putting themselves in check
       then they are in stalemate.*/
     cout << opponent << " is in stalemate" << endl;
+    game_over = true;
     return;
   }
 

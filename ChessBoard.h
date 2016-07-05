@@ -18,6 +18,7 @@ class ChessBoard{
   string black_king;
   //position on board of white king
   string white_king;
+  bool game_over;
  public: 
 
   /*Constructor function for chessboard.*/
